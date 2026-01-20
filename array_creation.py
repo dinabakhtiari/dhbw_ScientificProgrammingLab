@@ -57,4 +57,7 @@ print("---------------")
 print(my_2d_array.T)
 print("---------------")
 
+print(np.arange(7)[3:])
+print("---------------")
+
 
