@@ -17,10 +17,39 @@ def check_winner(b):
     return None
 
 print_board(board)
-board[0][0] = 'X'
-board[0][1] = 'X'
-board[0][2] = 'X'
-print_board(board)
+import math
 
-winner = check_winner(board)
-print(f"Result {winner}")
+def minimax(board, depth, is_maximizing):
+    result = check_winner(board)
+    if result == 'O': return 10 - depth 
+    if result == 'X': return depth - 10  
+    if result == 'Tie': return 0
+
+    if is_maximizing:
+        best_score = -math.inf
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == ' ':
+                    board[i][j] = 'O'
+                    score = minimax(board, depth + 1, False)
+                    board[i][j] = ' '
+                    best_score = max(score, best_score)
+        return best_score
+    else:
+        best_score = math.inf
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == ' ':
+                    board[i][j] = 'X'
+                    score = minimax(board, depth + 1, True)
+                    board[i][j] = ' '
+                    best_score = min(score, best_score)
+        return best_score
+    
+test_board = [
+    ['O', 'O', ' '],
+    ['X', 'X', ' '],
+    [' ', ' ', ' ']
+]
+score = minimax(test_board, 0, True)
+print(f"Max Score possible for this board: {score}")
