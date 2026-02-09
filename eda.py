@@ -43,3 +43,29 @@ print(df_clean.isnull().sum())
 # 4. Check the species distribution to ensure data balance [cite: 43]
 print("\nFinal species counts:")
 print(df_clean['species'].value_counts())
+
+
+# Create a 2x2 subplot grid with a specific size
+# figsize=(12, 10) ensures the plots are large enough to read
+fig, ax = plt.subplots(2, 2, figsize=(12, 10))
+
+# A) Histogram: distribution of bill length by species
+sns.histplot(data=df_clean, x='bill_length_mm', hue='species', kde=True, ax=ax[0,0]) 
+ax[0,0].set_title('Bill Length by Species')
+
+# B) Boxplot: flipper length distribution across species
+sns.boxplot(data=df_clean, x='species', y='flipper_length_mm', ax=ax[0,1]) 
+ax[0,1].set_title('Flipper Length by Species')
+
+# C) Scatterplot: relationship between bill length and body mass
+sns.scatterplot(data=df_clean, x='bill_length_mm', y='body_mass_g', hue='species', ax=ax[1,0])
+ax[1,0].set_title('Bill vs Body Mass')
+
+# D) Countplot: number of species found on each island
+sns.countplot(data=df_clean, x='island', hue='species', ax=ax[1,1])
+ax[1,1].set_title('Species by Island')
+
+# Adjust the padding between plots
+plt.tight_layout()
+plt.show()
+
