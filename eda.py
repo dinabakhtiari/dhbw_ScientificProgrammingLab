@@ -26,3 +26,20 @@ print(df.describe())
 # 50%         44.450000      17.300000         197.000000  4050.000000
 # 75%         48.500000      18.700000         213.000000  4750.000000
 # max         59.600000      21.500000         231.000000  6300.000000
+
+# --- Step 2: Data Cleaning ---
+# 1. Drop rows where essential measurements are missing
+# This removes the 2 rows we found in Step 1 that had no bill or flipper data.
+df_clean = df.dropna(subset=['bill_length_mm', 'flipper_length_mm'])
+
+# 2. Fill missing values in the 'sex' column with 'Unknown'
+# This handles the 11 missing values without deleting the whole row.
+df_clean['sex'] = df_clean['sex'].fillna('Unknown')
+
+# 3. Verify cleaning results 
+print("Missing values per column after cleaning:")
+print(df_clean.isnull().sum())
+
+# 4. Check the species distribution to ensure data balance [cite: 43]
+print("\nFinal species counts:")
+print(df_clean['species'].value_counts())
