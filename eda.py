@@ -27,6 +27,11 @@ print(df.describe())
 # 75%         48.500000      18.700000         213.000000  4750.000000
 # max         59.600000      21.500000         231.000000  6300.000000
 
+
+print("\n--- Missing Values Before Cleaning ---")
+print(df.isnull().sum())
+
+
 # --- Step 2: Data Cleaning ---
 # 1. Drop rows where essential measurements are missing
 # This removes the 2 rows we found in Step 1 that had no bill or flipper data.
@@ -40,7 +45,7 @@ df_clean['sex'] = df_clean['sex'].fillna('Unknown')
 print("Missing values per column after cleaning:")
 print(df_clean.isnull().sum())
 
-# 4. Check the species distribution to ensure data balance [cite: 43]
+# 4. Check the species distribution to ensure data balance
 print("\nFinal species counts:")
 print(df_clean['species'].value_counts())
 
@@ -68,4 +73,3 @@ ax[1,1].set_title('Species by Island')
 # Adjust the padding between plots
 plt.tight_layout()
 plt.show()
-
