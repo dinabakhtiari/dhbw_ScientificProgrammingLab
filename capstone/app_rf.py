@@ -22,7 +22,7 @@ except FileNotFoundError:
 #SIDEBAR: BUDGET CONTROLS
 # These ranges are strictly based on the historical dataset limits
 st.sidebar.header("🕹️ Simulation Dashboard")
-st.sidebar.info("Input Scale: Budgets are in Thousands ($1,000s)")
+st.sidebar.info("Input Scale: Budget in thousands ($1,000s)")
 
 
 tv = st.sidebar.slider("TV Budget ($)", 0.0, 300.0, 150.0)
